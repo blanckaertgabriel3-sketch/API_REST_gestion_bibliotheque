@@ -1,0 +1,1 @@
+-- spring.sql.init.mode=never /// à enlever dans application. propreties
