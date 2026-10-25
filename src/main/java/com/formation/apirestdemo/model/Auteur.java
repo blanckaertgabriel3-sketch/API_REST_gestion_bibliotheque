@@ -13,11 +13,25 @@ public class Auteur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String nom;
     private String prenom;
     private String nationalite;
 
     public Auteur() {
+    }
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getNationalite() {
+        return nationalite;
     }
 }
