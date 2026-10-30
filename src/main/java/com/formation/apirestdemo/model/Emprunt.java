@@ -1,92 +1,65 @@
-package com.formation.apirestdemo.model;
+package com.formation.bibliotheque.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "emprunts")
 public class Emprunt {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer livreId;
+    @Column(nullable = false)
+    private Long livreId;
+
+    @Column(nullable = false)
     private String emprunteur;
+
+    @Column(nullable = false)
     private String emailEmprunteur;
+
+    @Column(nullable = false)
     private LocalDate dateEmprunt;
+
+    @Column(nullable = false)
     private LocalDate dateRetourPrevue;
+
     private LocalDate dateRetourEffective;
+
+    @Column(nullable = false)
     private Boolean rendu;
 
     public Emprunt() {
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public Long getLivreId() { return livreId; }
+    public void setLivreId(Long livreId) { this.livreId = livreId; }
 
-    public Integer getLivreId() {
-        return livreId;
-    }
+    public String getEmprunteur() { return emprunteur; }
+    public void setEmprunteur(String emprunteur) { this.emprunteur = emprunteur; }
 
-    public void setLivreId(Integer livreId) {
-        this.livreId = livreId;
-    }
+    public String getEmailEmprunteur() { return emailEmprunteur; }
+    public void setEmailEmprunteur(String emailEmprunteur) { this.emailEmprunteur = emailEmprunteur; }
 
-    public String getEmprunteur() {
-        return emprunteur;
-    }
+    public LocalDate getDateEmprunt() { return dateEmprunt; }
+    public void setDateEmprunt(LocalDate dateEmprunt) { this.dateEmprunt = dateEmprunt; }
 
-    public void setEmprunteur(String emprunteur) {
-        this.emprunteur = emprunteur;
-    }
+    public LocalDate getDateRetourPrevue() { return dateRetourPrevue; }
+    public void setDateRetourPrevue(LocalDate dateRetourPrevue) { this.dateRetourPrevue = dateRetourPrevue; }
 
-    public String getEmailEmprunteur() {
-        return emailEmprunteur;
-    }
+    public LocalDate getDateRetourEffective() { return dateRetourEffective; }
+    public void setDateRetourEffective(LocalDate dateRetourEffective) { this.dateRetourEffective = dateRetourEffective; }
 
-    public void setEmailEmprunteur(String emailEmprunteur) {
-        this.emailEmprunteur = emailEmprunteur;
-    }
-
-    public LocalDate getDateEmprunt() {
-        return dateEmprunt;
-    }
-
-    public void setDateEmprunt(LocalDate dateEmprunt) {
-        this.dateEmprunt = dateEmprunt;
-    }
-
-    public LocalDate getDateRetourPrevue() {
-        return dateRetourPrevue;
-    }
-
-    public void setDateRetourPrevue(LocalDate dateRetourPrevue) {
-        this.dateRetourPrevue = dateRetourPrevue;
-    }
-
-    public LocalDate getDateRetourEffective() {
-        return dateRetourEffective;
-    }
-
-    public void setDateRetourEffective(LocalDate dateRetourEffective) {
-        this.dateRetourEffective = dateRetourEffective;
-    }
-
-    public Boolean getRendu() {
-        return rendu;
-    }
-
-    public void setRendu(Boolean rendu) {
-        this.rendu = rendu;
-    }
+    public Boolean getRendu() { return rendu; }
+    public void setRendu(Boolean rendu) { this.rendu = rendu; }
 }
