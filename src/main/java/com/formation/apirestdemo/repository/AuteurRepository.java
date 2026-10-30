@@ -2,6 +2,8 @@ package com.formation.apirestdemo.repository;
 
 import com.formation.apirestdemo.model.Auteur;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AuteurRepository extends JpaRepository<Auteur, Integer> {
+@Repository
+public interface AuteurRepository extends JpaRepository<Auteur, Long> {
 }

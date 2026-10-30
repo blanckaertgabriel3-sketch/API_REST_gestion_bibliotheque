@@ -1,45 +1,59 @@
 package com.formation.apirestdemo.service;
 
 import com.formation.apirestdemo.model.Auteur;
+import com.formation.apirestdemo.model.Livre;
 import com.formation.apirestdemo.repository.AuteurRepository;
+import com.formation.apirestdemo.repository.LivreRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AuteurService {
+
     private final AuteurRepository auteurRepository;
-    public AuteurService (AuteurRepository auteurRepository) {
+    private final LivreRepository livreRepository;
+
+    public AuteurService(AuteurRepository auteurRepository, LivreRepository livreRepository) {
         this.auteurRepository = auteurRepository;
+        this.livreRepository = livreRepository;
     }
-    public List<Auteur> recupererTous() {
-        return auteurRepository.findAll();
+
+    public Page<Auteur> recupererTous(Pageable pageable) {
+        return auteurRepository.findAll(pageable);
     }
-    public Optional<Auteur> recupererParId(Integer id) {
+
+    public Optional<Auteur> recupererParId(Long id) {
         return auteurRepository.findById(id);
     }
+
+    public boolean existe(Long id) {
+        return auteurRepository.existsById(id);
+    }
+
     public Auteur creer(Auteur auteur) {
         auteur.setId(null);
-
-        Auteur nouveauAuteur = auteurRepository.save(auteur);
-
-        return nouveauAuteur;
+        return auteurRepository.save(auteur);
     }
-    public Optional<Auteur> mettreAJour(Integer id, Auteur auteurModifie) {
-        return auteurRepository.findById(id)
-                .map(auteurExistant -> {
-                    auteurExistant.setNom(auteurModifie.getNom());
-                    auteurExistant.setPrenom(auteurModifie.getPrenom());
-                    auteurExistant.setNationalite(auteurModifie.getNationalite());
-                    return auteurRepository.save(auteurExistant);
-                });
+
+    public Auteur mettreAJour(Auteur auteurExistant, Auteur nouvellesValeurs) {
+        auteurExistant.setNom(nouvellesValeurs.getNom());
+        auteurExistant.setPrenom(nouvellesValeurs.getPrenom());
+        auteurExistant.setNationalite(nouvellesValeurs.getNationalite());
+        return auteurRepository.save(auteurExistant);
     }
-    public boolean supprimer(Integer id) {
-        if (auteurRepository.existsById(id)) {
-            auteurRepository.deleteById(id);
-            return true;
-        }
-        return false;
+
+    public boolean aDesLivres(Long id) {
+        return livreRepository.existsByAuteurId(id);
+    }
+
+    public void supprimer(Long id) {
+        auteurRepository.deleteById(id);
+    }
+
+    public Page<Livre> recupererLivres(Long id, Pageable pageable) {
+        return livreRepository.findByAuteurId(id, pageable);
     }
 }
